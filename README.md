@@ -93,3 +93,88 @@ Actuellement, l'évaluation du système est **qualitative et empirique** :
 ### Qualité du Code
 *   **Gestion des Erreurs** : Ajouter des blocs `try/except` plus spécifiques autour des appels réseaux ou chargements de modèles pour donner des messages d'erreur plus précis à l'utilisateur.
 *   **Configuration** : Déplacer les constantes (noms de modèles, chemins, prompts) dans un fichier `config.py` ou des variables d'environnement.
+
+# Architecture du projet
+
+## Objectif
+Application web Flask pour automatiser la recherche d'emploi, enrichir des offres via LLM, convertir un CV, puis calculer un score de matching entre le CV et les offres. L'interface propose un flux en 6 etapes avec logs et previews.
+
+## Structure du depot
+- app.py : point d'entree Flask, routes API, orchestration des etapes en thread.
+- services/ : logique metier (scraping, parsing, re-ecriture, matching).
+- utils/ : logger applicatif pour l'UI.
+- templates/index.html : interface web (6 cartes + panneau de logs).
+- static/ : CSS + JS (interaction UI, polls, previews).
+- data/ : fichiers intermediaires et resultats.
+- msedgedriver.exe : driver Selenium pour Edge.
+
+## Flux fonctionnel (pipeline)
+1) Step 1 - Collecte des offres
+   - Mode scrape (HelloWork) via `services/scraper.py`
+   - Mode texte brut via `services/raw_job_parser.py`
+   - Sortie: `data/jobs_raw.csv`
+2) Step 2 - Re-ecriture offres (LLM)
+   - `services/job_rewriter.py` (Qwen2.5-1.5B-Instruct)
+   - Sortie: `data/jobs_rewritten.csv` (ajout de Resume_IA)
+3) Step 3 - Conversion CV PDF -> TXT
+   - `services/cv_converter.py` (pdfplumber + nettoyage)
+   - Sortie: `data/cv_converted.txt`
+4) Step 4 - Synthese CV (LLM)
+   - `services/cv_rewriter.py` (Qwen2.5-1.5B-Instruct)
+   - Sortie: `data/cv_synthesized.txt`
+5) Step 5 - Matching semantic
+   - `services/matcher.py` (SentenceTransformer BAAI/bge-m3 + cosine)
+   - Sortie: `data/final_matches.csv`
+6) Step 6 - Cross matching (reranker)
+   - `services/cross_encoder_matcher.py` (BAAI/bge-reranker-v2-m3)
+   - Sortie: `data/final_matches_cross.csv`
+
+## Backend (Flask)
+Routes principales dans `app.py`:
+- GET `/` : page principale.
+- GET `/api/logs` : etat + logs pour l'UI.
+- GET `/api/files/<filename>` : telechargement depuis `data/`.
+- GET `/api/preview/step1..step6` : apercus des resultats.
+- POST `/api/step1` : lance scraping ou parsing texte brut.
+- POST `/api/step2` : re-ecriture des offres.
+- POST `/api/step3/upload` : upload PDF.
+- POST `/api/step3` : conversion du CV.
+- POST `/api/step4` : synthese CV.
+- POST `/api/step5` : matching semantic.
+- POST `/api/step6` : cross matching.
+
+Orchestration:
+- `run_task()` lance chaque etape en thread pour ne pas bloquer Flask.
+- Le logger (`utils/logger.py`) centralise statut, logs, etat des taches.
+
+## Services (logique metier)
+- `services/scraper.py` : Selenium Edge, extraction de liens et details, segmentation Missions/Profil.
+- `services/raw_job_parser.py` : parsing d'un texte brut en JSON via Qwen.
+- `services/job_rewriter.py` : resume structure des offres via Qwen.
+- `services/cv_converter.py` : extraction texte PDF + nettoyage.
+- `services/cv_rewriter.py` : synthese de CV normalisee via Qwen.
+- `services/matcher.py` : embeddings + cosine pour score 0-100.
+- `services/cross_encoder_matcher.py` : reranking plus precis via cross-encoder.
+
+## Frontend
+`templates/index.html` + `static/js/main.js`:
+- UI en 6 cartes (etapes) + panneau de logs.
+- Polling `/api/logs` toutes les secondes.
+- Previews via `/api/preview/stepX` pour afficher echantillons/resultats.
+- Upload PDF declenche automatiquement `/api/step3/upload`.
+
+## Donnees et artefacts
+Fichiers generes dans `data/`:
+- jobs_raw.csv : collecte brute (scrape ou texte brut parse).
+- jobs_rewritten.csv : offres enrichies (Resume_IA).
+- cv_converted.txt : texte brut du PDF.
+- cv_synthesized.txt : synthese structuree du profil.
+- final_matches.csv : scores de matching semantic.
+- final_matches_cross.csv : scores rerank cross-encoder.
+
+## Dependances clefs
+- Flask (backend), pandas (I/O CSV)
+- Selenium + Edge driver (scraping HelloWork)
+- pdfplumber (extraction PDF)
+- transformers + torch (Qwen2.5)
+- sentence-transformers + scikit-learn (matching)
