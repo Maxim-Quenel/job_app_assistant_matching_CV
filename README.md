@@ -1,6 +1,7 @@
 # Rapport d'Analyse du Projet : Job Application Assistant
 
 Ce document présente une analyse détaillée du projet d'assistant de candidature automatisé, couvrant son contexte, son architecture, ses choix techniques, le traitement des données et les perspectives d'évolution.
+Démon on Youtube : https://www.youtube.com/watch?v=ROofgB8_Obw
 
 ## 1. Contexte du Projet
 
