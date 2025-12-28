@@ -1,0 +1,54 @@
+/* Previews & Status */
+
+.preview-box {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: #0b1120;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    /* Hidden by default */
+}
+
+.preview-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.preview-row {
+    padding: 0.5rem;
+    background: #1e293b;
+    border-radius: 4px;
+}
+
+.preview-row div {
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-family: 'Consolas', monospace;
+    color: #cbd5e1;
+}
+
+.status-running {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.status-completed {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.status-error {
+    color: #ef4444;
+    font-weight: 600;
+}

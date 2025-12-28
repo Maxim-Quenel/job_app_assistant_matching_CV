@@ -1,0 +1,87 @@
+/* Match Results Styles */
+.match-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.match-card {
+    background: #1e293b;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.match-card:hover {
+    border-color: var(--accent-color);
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.match-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.match-info strong {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.company {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.match-score {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.score-high {
+    background: #10b981;
+}
+
+.score-mid {
+    background: #f59e0b;
+}
+
+.score-low {
+    background: #ef4444;
+}
+
+.match-details {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+
+.match-details p {
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.match-link {
+    display: inline-block;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.match-link:hover {
+    text-decoration: underline;
+}

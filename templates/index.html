@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Assistant AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/preview.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/match_results.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/preview_list.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1><span class="gradient-text">Job AI</span> Assistant</h1>
+            <p>Automatisation intelligente de votre recherche d'emploi</p>
+        </header>
+
+        <main class="grid-layout">
+            <!-- Step 1: Scraper -->
+            <section class="card step-card" id="step1">
+                <div class="card-header">
+                    <span class="step-number">01</span>
+                    <h2>Recherche d'Offres</h2>
+                </div>
+                <div class="card-body">
+                    <p>Scrapez les dernières offres depuis HelloWork.</p>
+                    <div class="tabs">
+                        <div class="tab-header">
+                            <button class="tab-btn active" onclick="switchTab('keyword')">Par Mot-clé</button>
+                            <button class="tab-btn" onclick="switchTab('url')">Par Lien</button>
+                            <button class="tab-btn" onclick="switchTab('raw_text')">Par Texte Brut</button>
+                        </div>
+
+                        <!-- Tab 1: Keyword -->
+                        <div id="tab-keyword" class="tab-content active">
+                            <div class="input-group">
+                                <label>Mot-clé</label>
+                                <input type="text" id="keyword_input" value="Data Analyst"
+                                    placeholder="Ex: Data Scientist">
+                            </div>
+                            <div class="input-group">
+                                <label>Nombre d'offres</label>
+                                <input type="number" id="num_jobs" value="5" min="1" max="20">
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: URL -->
+                        <div id="tab-url" class="tab-content" style="display: none;">
+                            <div class="input-group">
+                                <label>Lien HelloWork (Recherche filtrée)</label>
+                                <input type="text" id="url_input"
+                                    placeholder="Collez le lien ici (https://www.hellowork.com/...)">
+                            </div>
+                            <small class="hint">Faites votre recherche sur HelloWork avec vos filtres, puis copiez l'URL
+                                ici.</small>
+                        </div>
+
+                        <!-- Tab 3: Raw Text -->
+                        <div id="tab-raw_text" class="tab-content" style="display: none;">
+                            <div class="input-group">
+                                <label>Texte de l'annonce</label>
+                                <textarea id="raw_text_input" rows="6"
+                                    placeholder="Collez ici le texte complet de l'annonce..."
+                                    style="background:#0f172a; border:1px solid #334155; color:white; border-radius:6px; padding:10px; font-family:inherit; max-width:100%; resize:vertical;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="runStep1()">Lancer Analyse</button>
+                    <div class="status-indicator" id="status1">En attente</div>
+                    <div id="preview1" class="preview-box"></div>
+                </div>
+            </section>
+
+            <!-- Step 2: Job Rewriter -->
+            <section class="card step-card" id="step2">
+                <div class="card-header">
+                    <span class="step-number">02</span>
+                    <h2>Réécriture Offres (IA)</h2>
+                </div>
+                <div class="card-body">
+                    <p>Analysez et résumez les offres avec Qwen 1.5B.</p>
+                    <button class="btn btn-primary" onclick="runStep2()">Lancer Réécriture</button>
+                    <div class="status-indicator" id="status2">En attente</div>
+                    <div id="preview2" class="preview-box"></div>
+                </div>
+            </section>
+
+            <!-- Step 3: CV Converter -->
+            <section class="card step-card" id="step3">
+                <div class="card-header">
+                    <span class="step-number">03</span>
+                    <h2>Conversion CV</h2>
+                </div>
+                <div class="card-body">
+                    <p>Convertissez votre CV PDF en texte brut nettoyé.</p>
+                    <div class="file-upload">
+                        <input type="file" id="cvFile" accept=".pdf">
+                        <label for="cvFile" class="file-label">Choisir un PDF</label>
+                        <span id="fileName">Aucun fichier</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="runStep3()">Convertir</button>
+                    <div class="status-indicator" id="status3">En attente</div>
+                    <div id="preview3" class="preview-box"></div>
+                </div>
+            </section>
+
+            <!-- Step 4: CV Rewriter -->
+            <section class="card step-card" id="step4">
+                <div class="card-header">
+                    <span class="step-number">04</span>
+                    <h2>Synthèse CV (IA)</h2>
+                </div>
+                <div class="card-body">
+                    <p>Générez une synthèse structurée de votre profil.</p>
+                    <button class="btn btn-primary" onclick="runStep4()">Générer Synthèse</button>
+                    <div class="status-indicator" id="status4">En attente</div>
+                    <div id="preview4" class="preview-box"></div>
+                </div>
+            </section>
+
+            <!-- Step 5: Matching -->
+            <section class="card step-card" id="step5">
+                <div class="card-header">
+                    <span class="step-number">05</span>
+                    <h2>Calcul Matching</h2>
+                </div>
+                <div class="card-body">
+                    <p>Comparez votre profil aux offres (Semantic Search).</p>
+                    <button class="btn btn-success" onclick="runStep5()">Calculer Scores</button>
+                    <div class="status-indicator" id="status5">En attente</div>
+                    <div id="preview5" class="preview-box"></div>
+                </div>
+            </section>
+
+            <!-- Step 6: Cross Matching -->
+            <section class="card step-card" id="step6">
+                <div class="card-header">
+                    <span class="step-number">06</span>
+                    <h2>Cross Matching (Ultra-Précis)</h2>
+                </div>
+                <div class="card-body">
+                    <p>Calcul précis avec Cross Encoder (plus lent mais meilleur).</p>
+                    <button class="btn btn-success" onclick="runStep6()">Lancer Cross Match</button>
+                    <div class="status-indicator" id="status6">En attente</div>
+                    <div id="preview6" class="preview-box"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Logger Panel -->
+        <section class="logger-panel">
+            <div class="logger-header">
+                <h3>Console & Logs</h3>
+                <span id="connection-status" class="badge">Connecté</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="logs-window" id="logsWindow">
+                <!-- Logs will appear here -->
+                <div class="log-line">Bienvenue dans Job AI Assistant. Prêt à démarrer.</div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
