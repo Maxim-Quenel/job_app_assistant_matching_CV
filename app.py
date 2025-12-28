@@ -12,6 +12,7 @@ from services.cv_converter import convert_cv_to_txt
 from services.cv_rewriter import rewrite_cv
 from services.matcher import calculate_matches
 from services.cross_encoder_matcher import calculate_cross_matches # IMPORT ADDED
+from services.explain import explain_matches # IMPORT ADDED
 from utils.logger import logger
 
 app = Flask(__name__)
@@ -62,7 +63,7 @@ def preview_step2():
         df = pd.read_csv(os.path.join(DATA_DIR, "jobs_rewritten.csv"))
         # Show specific columns
         cols = ['Poste', 'Entreprise', 'Resume_IA']
-        return jsonify(df[cols].head(3).to_dict(orient='records'))
+        return jsonify(df[cols].fillna("").to_dict(orient='records'))
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -70,8 +71,8 @@ def preview_step2():
 def preview_step3():
     try:
         with open(os.path.join(DATA_DIR, "cv_converted.txt"), 'r', encoding='utf-8') as f:
-            content = f.read(1000) # First 1000 chars
-        return jsonify({"content": content + "..."})
+            content = f.read() # Full content
+        return jsonify({"content": content})
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -106,6 +107,19 @@ def preview_step6():
         # Filter cols that actually exist
         existing_cols = [c for c in cols if c in df.columns]
         result = df[existing_cols].head(5).fillna("").to_dict(orient='records')
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+@app.route('/api/preview/step7')
+def preview_step7():
+    try:
+        df = pd.read_csv(os.path.join(DATA_DIR, "explained_matches.csv"))
+        # Return top 5 matches with explanations
+        cols = ['Poste', 'Entreprise', 'match_score', 'Explanation']
+        # Filter cols that actually exist
+        existing_cols = [c for c in cols if c in df.columns]
+        result = df[existing_cols].fillna("").to_dict(orient='records')
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -171,6 +185,12 @@ def step5_matching():
 @app.route('/api/step6', methods=['POST'])
 def step6_cross_matching():
     run_task('step6', calculate_cross_matches)
+    return jsonify({"status": "started"})
+
+# --- STEP 7: EXPLAIN MATCHES ---
+@app.route('/api/step7', methods=['POST'])
+def step7_explain_matches():
+    run_task('step7', explain_matches)
     return jsonify({"status": "started"})
 
 if __name__ == '__main__':

@@ -129,6 +129,11 @@ async function runStep6() {
     await fetch('/api/step6', { method: 'POST' });
 }
 
+async function runStep7() {
+    resetStatus('status7');
+    await fetch('/api/step7', { method: 'POST' });
+}
+
 function resetStatus(id) {
     document.getElementById(id).textContent = "En cours...";
     document.getElementById(id).className = "status-indicator status-running";
@@ -175,7 +180,9 @@ async function fetchPreview(taskName) {
 
         let html = '';
 
-        if (taskName === 'step5' || taskName === 'step6') {
+
+
+        if (taskName === 'step5' || taskName === 'step6' || taskName === 'step7') {
             // Special detailed view for Matching
             html = '<div class="match-results">';
             data.forEach(row => {
@@ -193,10 +200,11 @@ async function fetchPreview(taskName) {
                        </div>
                        <div class="match-score ${scoreClass}">${score}%</div>
                    </div>
-                   <div class="match-details">
-                       <p><strong>IA Résumé:</strong> ${row.Resume_IA || 'N/A'}</p>
-                       <a href="${row.Lien}" target="_blank" class="match-link">Voir l'offre →</a>
-                   </div>
+                    <div class="match-details">
+                        <p><strong>IA Résumé:</strong> ${row.Resume_IA || 'N/A'}</p>
+                        ${row.Explanation ? `<div style="background:#1e1e2f; padding:8px; margin-top:5px; border-left:3px solid #6c5ce7;"><strong>Explication:</strong> ${row.Explanation.replace(/\n/g, '<br>')}</div>` : ''}
+                        <a href="${row.Lien}" target="_blank" class="match-link">Voir l'offre →</a>
+                    </div>
                </div>`;
             });
             html += '</div>';
@@ -207,7 +215,7 @@ async function fetchPreview(taskName) {
                 html += '<div class="preview-row">';
                 Object.keys(row).forEach(k => {
                     if (k === 'Resume_IA') {
-                        html += `<div style="margin-top:5px; padding:5px; background: #2a2a40; border-radius:4px;">
+                        html += `<div style="margin-top:5px; padding:5px; background: #2a2a40; border-radius:4px; white-space: pre-wrap;">
                                     <strong>Résumé IA:</strong> <span style="font-size:0.9em; color:#ddd;">${row[k]}</span>
                                  </div>`;
                     } else {

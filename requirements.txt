@@ -1,0 +1,10 @@
+flask
+pandas
+selenium
+torch
+transformers
+sentence-transformers
+scikit-learn
+pdfplumber
+numpy
+matplotlib
