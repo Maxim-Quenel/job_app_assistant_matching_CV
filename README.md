@@ -1,5 +1,5 @@
 # Documentation du Projet : Job Application Assistant
-* [cite_start][Vidéo de démonstration](https://youtu.be/kI_qEuUWzUo?si=bX4tef1I_LSxfEUj)
+[Vidéo de démonstration](https://youtu.be/kI_qEuUWzUo?si=bX4tef1I_LSxfEUj)
 
 ## 1. Contexte du Projet
 
