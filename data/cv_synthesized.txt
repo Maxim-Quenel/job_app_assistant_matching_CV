@@ -1,26 +1,38 @@
 ### 1. Synthèse du Profil
-**Intitulé du poste** : Gestionnaire Locatif
-**Resumé** : Candidat expérimenté dans le domaine de la gestion locative.
+**Intitulé du poste** : Ingénieur Informatique ou Technologue Avancé en Intelligence Artificielle
+**Resumé** : Candidat expérimenté dans le domaine de l'intelligence artificielle.
 
 ### 2. Compétences Techniques (Hard Skills)
-- Adobe Canva
-- Google Workspace
-- Microsoft Office
-- Outils de gestion locative (GARAC)
+
+* Création Assistant LLM utilisant RAG vectorielle et fine-tuning 
+* Developpement D'une Interface Web En Python Pour Indexer Du Code Legacy
+* Implémentation De Un Mécanisme RAG Améliorant La Précision Des Réponses
+* Mobilité Geographique: Gestion Du Fine-Tuning Et De L'intégration D'api Llm Multiples
+* Optimisation De La Reversibilité Et De La Maintenabilité Du Code Source Disponible Pour Des Missions En Itinérance Avec Logement Prévu Sur Place
+* Développement D'une Application Web City Data - 2024 - Esiv
+* Expériences Dans Le Domaine De L'IoT & Projet Smart Lampadaire Intelligent 
 
 ### 3. Qualités Professionnelles (Soft Skills)
-- Organisation
-- Communication
-- Relation clientèle
-- Polyvalence
+
+* Intervenant Particulier / Professeur Particulier
+* Collaboration Établit Par Les Projets
+* Adaptabilité Aux Changements
+* Compréhension Rapidement Des Concepts Complexes
+* Capacité À Assumer Une Autonomie
+* Sens De L'équipe
+* Bonne Communication
+* Flexibilité Temporelle
 
 ### 4. Analyse de l'Expérience
-**Niveau** : Confirmé
-**Secteurs dominants** : Immobilier, Gestion de Biens
-**Atouts clés** : Expérience en gestion de réservations, relations avec les locataires, utilisation de plateformes en ligne pour optimiser l'administration des locations.
+
+**Niveau**: Junior  
+**Secteurs Dominants**: Industrie Financière, Santé, Services Publics  
+
+**Atouts Clés**: Possession De Certains Diplomes Spécialises, Experiences Au Travail En Equipe, Excellentes Competences En Programmation, Capacité À Adapter Ses Idées À Chaque Situation, Très Grande Curiosité Poursuite D'apprentissage Continuel
 
 ### 5. Formation Académique
-- Baccalauréat en Marketing Visual
-- Diplôme en Service Après-Vente Automobile
-- Certificat en Gestion de Chambres d'Hotes
-- Permis B 06.64.85.33.53
+
+* Bac +2 Espaces Intellectuels Lyon Saint Jean
+* BTS Systèmes Numériques
+* Licence Ecole Nationale Supérieure d'Ingénieurs Villeurbanne
+* Master II Intelligence Artificielle ESPCI ParisTech

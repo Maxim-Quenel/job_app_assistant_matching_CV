@@ -96,7 +96,8 @@ def rewrite_cv(cv_txt_path=None, progress_callback=None):
         max_new_tokens=1000,
         temperature=0.2,
         top_p=0.9,
-        repetition_penalty=1.1
+        repetition_penalty=1.2,
+        do_sample=True
     )
 
     generated_ids = [

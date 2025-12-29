@@ -1,62 +1,60 @@
 
 --- PAGE 1 ---
-CAT
-OI
-V
-L
-E
-N
-O
-I
-T
-S
-ECELYANNFRANCHET
-G
-Passionné par la gestion locative, j’ai acquis une solide
-expérience en tant qu’hôte et gestionnaire de chambres d’hôtes,
-assurant l’administration des locations, la satisfaction des
-locataires et l’entretien des biens. Organisé et polyvalent, je
-maîtrise les outils informatiques et la relation clientèle,
-garantissant une gestion efficace et optimisée des biens
-immobiliers.
-Permis B 06.64.85.33.53 celyannfranchet@icloud.com Angoulême
-EXPÉRIENCES
-LANGUES
-GESTIONNAIRE DE BIEN LOCATIFS
-FRA ENG ESP
-- 2021/2025
-Auto-Entreprise
-Natale Scolaire Scolaire
-Gestion des réservations, contrats de
-location et états des lieux.
-Accueil et assistance des locataires pour
-garantir leur satisfaction.
-Gestion des réclamations et résolution des
-problèmes locatifs. ÉDUCATION
-Suivi des travaux d’entretien et coordination
-avec les prestataires.
-Utilisation d’outils de gestion locative et
-GARAC - 2022/2023
-plateformes en ligne pour optimiser
-T.F.P Réceptionnaire Après-Vente
-l’administration des locations.
-Mise en place de stratégies de fidélisation et J’ai appris en alternance et en concession
-amélioration de l’expérience client. automobile l’accueille des clients, coordonner
-les réparations et veiller à leur satisfaction.
-CONSEILLER COMMERCIAL SERVICE
-- 2022/2024
-LYCÉE DES MÉTIERS D’ART - 2015/2018
-Concession automobile
-BAC PRO Marchandisage Visuel
-Dans un service après-vente en concession
-J'ai maîtrisé le développement complet
-automobile accueille les clients, diagnostique
-d'applications web, de la conception à
-leurs besoins et propose des solutions adaptées
-l'implémentation.
-pour l’entretien ou la réparation de leur véhicule.
-J’assure le suivi des interventions, coordonne
-avec l’atelier et veille à la satisfaction client.
-COMPÉTENCES
-Adobe Canva Google Workspace Microsoft Office
-Organisation Management Relation clientèle
+MaximQuénel
+Stage - Intelligenceartificielle
+Du09 / 0 2 / 2026au01 / 0 9 / 2026
+Étudiant en Master 2 à l’ESILV, spécialité Intelligence Artificielle, je
+m’intéresse à l’application concrète des technologies avancées pour
+résoudre des problématiques complexes. Rigoureux, curieux et
+collaboratif, je souhaite m’investir dans des projets d’IA à fort impact.
+GitHub LinkedIn
+Expérience ( hardskills )
+0611472064
+Création assistant LLM utilisant RAG vectorielle et fine-tuning - 2025 - SNCF
+maximquenel1@gmail.com
+Développement d’une interface web en Python pour indexer du code C legacy
+Implémentation d’un mécanisme RAG améliorant la précision des réponses
+Mobilité géographique Gestion du fine-tuning et de l’intégration d’API LLM multiples
+Amélioration de la réversibilité et de la maintenabilité du code source
+disponible pour des missions en itinérance,
+avec logement prévu sur place.
+Développement d’une application web City Data - 2024 - ESILV
+Formation Conception et réalisation d’une interface web en Python pour la visualisation de données urbaines
+Personnalisation des affichages selon le profil utilisateur d’après l’entreprise UPEAK
+Participation à l’ensemble du cycle de développement (cahier des charges → application finale)
+2025
+Livraison d’une application utilisable, maintenable et robuste
+5ème année école d’ingénieur
+options Intelligence Artificielle
+ESILV (La défense 92) Prototypage d’un lampadaire intelligent - 2023 - Lycée Louis Rascol
+Conception et réalisation d’un lampadaire connecté avec carte Arduino, capteurs et
+2023 connexion Bluetooth
+CPGE TSI Développement de fonctionnalités d’IoT pour la gestion intelligente de l’éclairage
+Renforcement des compétences en prototypage et en R&D
+Lycée Louis Rascol (Albi 81)
+2021
+Expérience ( softskills )
+Baccalauréat STI2D SIN
+Lycée Gustave Eiffel (Bordeaux 33)
+Soldat - 10/2021 - 501 ème régiment du train Angoulême
+2018
+Développement de compétences de travail en équipe, discipline et gestion du stress
+BIA / Brevet Participations à des exercices pratiques et des formations en stratégie militaire
+Collège La Fontaine (Montlieu 17) Renforcement de mon sens du leadership et de la camaraderie
+Compétences
+Intervenant / professeur particulier - 2021 à 2024 - Paris/Bordeaux/Albi
+Animations de cours particuliers de mathématiques et physique à des élèves de collège et lycée
+Python/C#/js/HTML/SQL
+Acquisition d’une solide expérience en pédagogie et transmission de connaissances
+Animations de cours pour des étudiants en L2 à l’EMLV (école de commerce)
+Scikit-Learn/ Transformers/Tensorflow/Pytorch
+Développement de compétences en communication, adaptabilité et gestion de profils variés
+LLM/VS Code /Google Colab/GitHub/Docker
+Python, C++, Java, Scala, R, MATLAB, Machine Learning, Deep Learning, Reinforcement Learning, NLP (Natural Language Processing), Computer Vision, Big Data, Data Mining, Data
+Engineering, Cloud Computing (AWS, Azure, GCP), MLOps, DevOps, TensorFlow, PyTorch, Keras, Scikit-learn, Transformers, LLM (Large Language Models), Graph Neural Networks, Edge
+Analyse de problème/pensée critique AI, Agile, Scrum, Kanban, CI/CD, Git, Docker, Kubernetes, REST API, GraphQL, Microservices, Version Control, Linear Algebra, Probability, Statistics, Optimization, Signal Processing,
+Robotics, Autonomous Systems, IoT, Cybersecurity, Natural Sciences Modeling, Problem Solving, Critical Thinking, Teamwork, Leadership, Communication Skills
+Méthodologie Scrum
+Centresd ’ intérêts
+Langues Musique (joueur de guitare) Visite lieux historiques/Exploration Urbaine
+Français / Anglais Sport (Judo/callisthénie) Actualité technologique

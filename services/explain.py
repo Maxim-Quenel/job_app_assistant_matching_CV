@@ -9,6 +9,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
 def explain_matches(cv_txt_path=None, matches_csv_path=None, progress_callback=None):
     """
     Explains matches between CV and Jobs using Qwen model.
+    Results are cleaned to ensure single-line output per row in the CSV.
     """
     if cv_txt_path is None:
         cv_txt_path = os.path.join(DATA_DIR, "cv_synthesized.txt")
@@ -42,11 +43,6 @@ def explain_matches(cv_txt_path=None, matches_csv_path=None, progress_callback=N
             cv_content = f.read()
         
         df_jobs = pd.read_csv(matches_csv_path)
-        # Limit to top 10 to avoid extremely long processing if not specified? 
-        # User said "chaque offres", but if there are 50 it will take forever.
-        # Let's process all but warn or maybe just top 5 by default if too many?
-        # For now, I will process all but checking if df is huge might be good.
-        # Let's stick to processing all as requested, but maybe the user can filter in step 1.
         
     except Exception as e:
         if progress_callback:
@@ -111,16 +107,25 @@ def explain_matches(cv_txt_path=None, matches_csv_path=None, progress_callback=N
         
         generated_ids = model.generate(
             **model_inputs,
-            max_new_tokens=300, # Concise explanation
+            max_new_tokens=1500, 
             temperature=0.3,
-            top_p=0.9
+            top_p=0.9,
         )
         
         generated_ids = [
             output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
         ]
         response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
-        explanations.append(response)
+        
+        # --- MODIFICATION ICI ---
+        # Remplacement des sauts de ligne par des espaces pour tout garder sur une seule ligne
+        response_single_line = response.replace('\n', ' ').replace('\r', ' ').strip()
+        
+        # Optionnel : retirer les doubles espaces créés par la suppression des retours à la ligne
+        while '  ' in response_single_line:
+            response_single_line = response_single_line.replace('  ', ' ')
+            
+        explanations.append(response_single_line)
         
         if progress_callback:
             progress_callback(f"[{index+1}/{total_jobs}] Analyse terminée pour {job_title}")
@@ -128,10 +133,13 @@ def explain_matches(cv_txt_path=None, matches_csv_path=None, progress_callback=N
     df_jobs['Explanation'] = explanations
     
     output_path = os.path.join(DATA_DIR, 'explained_matches.csv')
-    df_jobs.to_csv(output_path, index=False)
+    
+    # escapechar permet de gérer proprement les caractères spéciaux si nécessaire, 
+    # mais le nettoyage ci-dessus fait le gros du travail.
+    df_jobs.to_csv(output_path, index=False, encoding='utf-8')
     
     if progress_callback:
-        progress_callback("✅ Explications générées avec succès.")
+        progress_callback("✅ Explications générées avec succès (Format ligne unique).")
 
     # Cleanup
     del model
