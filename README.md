@@ -1,6 +1,8 @@
 # Documentation du Projet : Job Application Assistant
 [Vidéo de démonstration](https://youtu.be/kI_qEuUWzUo?si=bX4tef1I_LSxfEUj)
 
+![Aperçu de l'interface](interface.png)
+
 ## 1. Contexte du Projet
 
 Le projet **Job Application Assistant** est une application web locale conçue pour automatiser et optimiser le processus de recherche d’emploi. Il vise à réduire la charge cognitive et temporelle liée à la personnalisation des candidatures en :
